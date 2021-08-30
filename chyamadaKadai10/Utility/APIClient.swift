@@ -220,19 +220,21 @@ final class APIClient {
 """
         return json
     }
-    //        APIClientの本来のgetPrefectureの中身
-    //        guard let url = URL(string: urlString) else { return }
-    //        var request = URLRequest(url: url)
-    //        request.addValue("3f33npiuU0TiR3Ii1afszxaaXNSB314AOOqNWpO9", forHTTPHeaderField: "X-API-KEY" )
-    //        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-    //            if error != nil { return }
-    //            guard let data = data else { return }
-    //            guard let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
-    //                return
-    //            }
-    //            DispatchQueue.main.async {
-    //                completion(result)
-    //            }
-    //        }
-    //        task.resume()
 }
+
+
+//        APIClientの本来のgetPrefectureの中身
+//        guard let url = URL(string: urlString) else { return }
+//        var request = URLRequest(url: url)
+//        request.addValue("APIキー", forHTTPHeaderField: "X-API-KEY" )
+//        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+//            if error != nil { return }
+//            guard let data = data else { return }
+//            guard let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                completion(result)
+//            }
+//        }
+//        task.resume()
