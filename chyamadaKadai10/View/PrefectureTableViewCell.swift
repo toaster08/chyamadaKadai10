@@ -16,17 +16,11 @@ final class PrefectureTableViewCell: UITableViewCell {
         }
     }
 
-    func clearLabel() {
-        prefectureNameLabel.text = nil
-        prefectureCodeNumberLabel.text = nil
-    }
-
-    func configureLabel(of prefecture: Prefecture) {
+    func configure(prefecture: Prefecture, row: Int) {
         prefectureNameLabel.text = prefecture.name
         prefectureCodeNumberLabel.text = String(describing: prefecture.codeNumber)
-    }
 
-    func configureColor(of cell: UITableViewCell, in color:() -> UIColor) {
-        cell.backgroundColor = color()
+        let colors: [UIColor] = [#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)]
+        backgroundColor = colors[row % colors.count]
     }
 }
