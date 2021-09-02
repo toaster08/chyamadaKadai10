@@ -7,15 +7,7 @@
 
 import Foundation
 
-struct PrefectureModel: Codable {
-    var prefecture: [Prefecture] = []
-
-    enum CodingKeys: String, CodingKey {
-        case prefecture = "result"
-    }
-}
-
-struct Prefecture: Codable {
+struct Prefecture: Decodable {
     var name: String
     var codeNumber: Int
 
