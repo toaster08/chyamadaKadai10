@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol APIClientProtocol {
+    func getPrefecture(completion: @escaping ((PrefectureModel) -> Void))
+}
+
 final class ViewController: UIViewController {
     let nibCellName = "PrefectureTableViewCell"
     let nibId = "Cell"
@@ -25,7 +29,9 @@ final class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        let apiClient = APIClient.shared
+        let apiClient: APIClientProtocol = APIClientMock()
+        //        let apiClient: APIClientProtocol = APIClient()
+
         apiClient.getPrefecture(completion: {[weak self] prefectures in
             self?.prefectures = prefectures
             self?.tableView.reloadData()

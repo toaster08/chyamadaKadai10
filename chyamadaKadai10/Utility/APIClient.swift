@@ -7,13 +7,9 @@
 
 import Foundation
 
-final class APIClient {
-    // URLSessionのsharedメソッドの代替
-    static let shared = APIClient()
-    private init() { }
-
+final class APIClientMock: APIClientProtocol {
     func getPrefecture(completion: @escaping ((PrefectureModel) -> Void)) {
-        guard let data = APIClient.sampleAPI.data(using: .utf8),
+        guard let data = Self.sampleAPI.data(using: .utf8),
               let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
             return
         }
@@ -222,19 +218,22 @@ final class APIClient {
     }
 }
 
-
-//        APIClientの本来のgetPrefectureの中身
-//        guard let url = URL(string: urlString) else { return }
-//        var request = URLRequest(url: url)
-//        request.addValue("APIキー", forHTTPHeaderField: "X-API-KEY" )
-//        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-//            if error != nil { return }
-//            guard let data = data else { return }
-//            guard let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
-//                return
-//            }
-//            DispatchQueue.main.async {
-//                completion(result)
-//            }
-//        }
-//        task.resume()
+final class APIClient: APIClientProtocol {
+    func getPrefecture(completion: @escaping ((PrefectureModel) -> Void)) {
+        let urlString = "ここに実際のURLを記入する"
+        guard let url = URL(string: urlString) else { return }
+        var request = URLRequest(url: url)
+        request.addValue("APIキー", forHTTPHeaderField: "X-API-KEY" )
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            if error != nil { return }
+            guard let data = data else { return }
+            guard let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
+                return
+            }
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+        task.resume()
+    }
+}
