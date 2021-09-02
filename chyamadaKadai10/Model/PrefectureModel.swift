@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PrefectureModel: Codable {
+struct PrefectureModel: Decodable {
     var prefecture: [Prefecture] = []
 
     enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct PrefectureModel: Codable {
     }
 }
 
-struct Prefecture: Codable {
+struct Prefecture: Decodable {
     var name: String
     var codeNumber: Int
 
