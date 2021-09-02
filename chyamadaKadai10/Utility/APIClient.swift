@@ -230,9 +230,7 @@ final class APIClient: APIClientProtocol {
             guard let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
                 return
             }
-            DispatchQueue.main.async {
-                completion(result.prefecture)
-            }
+            completion(result.prefecture)
         }
         task.resume()
     }

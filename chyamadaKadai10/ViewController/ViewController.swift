@@ -32,9 +32,11 @@ final class ViewController: UIViewController {
         let apiClient: APIClientProtocol = APIClientMock()
         //        let apiClient: APIClientProtocol = APIClient()
 
-        apiClient.getPrefecture(completion: {[weak self] prefectures in
-            self?.prefectures = prefectures
-            self?.tableView.reloadData()
+        apiClient.getPrefecture(completion: { prefectures in
+            DispatchQueue.main.async { [weak self] in
+                self?.prefectures = prefectures
+                self?.tableView.reloadData()
+            }
         })
     }
 }
