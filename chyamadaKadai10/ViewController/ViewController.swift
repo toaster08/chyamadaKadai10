@@ -8,7 +8,7 @@
 import UIKit
 
 protocol APIClientProtocol {
-    func getPrefecture(completion: @escaping ((PrefectureModel) -> Void))
+    func getPrefecture(completion: @escaping (([Prefecture]) -> Void))
 }
 
 final class ViewController: UIViewController {
@@ -22,7 +22,7 @@ final class ViewController: UIViewController {
         }
     }
 
-    private var prefectures = PrefectureModel()
+    private var prefectures: [Prefecture] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ final class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return prefectures.prefecture.count
+        return prefectures.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +49,7 @@ extension ViewController: UITableViewDataSource {
             fatalError("The dequeued cell is not instance")
         }
 
-        let prefecture = prefectures.prefecture[indexPath.row]
+        let prefecture = prefectures[indexPath.row]
 
         cell.configure(prefecture: prefecture, row: indexPath.row)
 

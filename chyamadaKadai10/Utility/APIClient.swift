@@ -8,12 +8,12 @@
 import Foundation
 
 final class APIClientMock: APIClientProtocol {
-    func getPrefecture(completion: @escaping ((PrefectureModel) -> Void)) {
+    func getPrefecture(completion: @escaping (([Prefecture]) -> Void)) {
         guard let data = Self.sampleAPI.data(using: .utf8),
               let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
             return
         }
-        completion(result)
+        completion(result.prefecture)
     }
 
     // 取得内容はAPIを叩いた場合の同様としています
@@ -219,7 +219,7 @@ final class APIClientMock: APIClientProtocol {
 }
 
 final class APIClient: APIClientProtocol {
-    func getPrefecture(completion: @escaping ((PrefectureModel) -> Void)) {
+    func getPrefecture(completion: @escaping (([Prefecture]) -> Void)) {
         let urlString = "ここに実際のURLを記入する"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
@@ -231,9 +231,17 @@ final class APIClient: APIClientProtocol {
                 return
             }
             DispatchQueue.main.async {
-                completion(result)
+                completion(result.prefecture)
             }
         }
         task.resume()
+    }
+}
+
+private struct PrefectureModel: Decodable {
+    var prefecture: [Prefecture] = []
+
+    enum CodingKeys: String, CodingKey {
+        case prefecture = "result"
     }
 }
