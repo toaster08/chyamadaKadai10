@@ -14,7 +14,7 @@ final class APIClient {
 
     func getPrefecture(completion: @escaping ((PrefectureModel) -> Void)) {
         guard let data = APIClient.sampleAPI.data(using: .utf8),
-              let result = try? JSONDecoder().decode(PrefectureModel.self, from: data)else {
+              let result = try? JSONDecoder().decode(PrefectureModel.self, from: data) else {
             return
         }
         completion(result)
@@ -221,7 +221,6 @@ final class APIClient {
         return json
     }
 }
-
 
 //        APIClientの本来のgetPrefectureの中身
 //        guard let url = URL(string: urlString) else { return }
